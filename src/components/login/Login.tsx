@@ -10,7 +10,7 @@ const {
 const appName = "Trello_App";
 const requestUrl = `https://trello.com/1/authorize?return_url=${REACT_APP_REDIRECT_URL}?expiration=${REACT_APP_EXPIRATION_TIME}&name=${appName}&scope=${REACT_APP_SCOPE}&response_type=token&key=${REACT_APP_API_KEY}`;
 
-export default class Login extends React.Component {
+export class Login extends React.Component {
   render() {
     return (
       <div>
