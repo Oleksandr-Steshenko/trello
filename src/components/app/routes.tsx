@@ -6,34 +6,44 @@ import { Login } from "../login";
 import { Dashboard } from "../dashboard";
 import { NotFound } from "../not-found";
 
+export enum ROUTES_URLS {
+  HOME = "/",
+  LOGIN = "/signin",
+  DASHBOARD = "/dashboard",
+  OAUTH = "/oauth",
+  NOT_FOUND = "/404"
+}
+
 export interface AppRoute {
   title?: string;
-  path: string;
+  path: ROUTES_URLS;
   exact?: boolean;
   isHidden?: boolean;
+  isProtected?: boolean;
   render: (props: any) => any;
 }
 
 export const routes: Array<AppRoute> = [
   {
     title: "Login",
-    path: "/login",
+    path: ROUTES_URLS.LOGIN,
     exact: true,
     render: (props: any) => <Login {...props} />
   },
   {
     title: "Dashboard",
-    path: "/dashboard",
+    path: ROUTES_URLS.DASHBOARD,
+    isProtected: true,
     render: (props: RouteChildrenProps) => <Dashboard {...props} />
   },
   {
-    path: "/",
+    path: ROUTES_URLS.HOME,
     exact: true,
     isHidden: true,
-    render: () => <Redirect to="/login" />
+    render: () => <Redirect to={ROUTES_URLS.LOGIN} />
   },
   {
-    path: "/404",
+    path: ROUTES_URLS.NOT_FOUND,
     isHidden: true,
     render: (props: RouteChildrenProps) => <NotFound {...props} />
   }
